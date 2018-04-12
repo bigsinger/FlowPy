@@ -49,21 +49,22 @@ def initLog(logFile, isLog2File = False):
 
 
 def main(params):
-    args = None
-    parser = MyArgumentParser(description="自动打包发布工具参数说明")
-    parser.add_argument('key', help="Redis key where items are stored")
-    parser.add_argument('--file', required=True, help='设置xxx文件路径')
-    parser.add_argument('--ver', help='设置版本号')
-    parser.add_argument('--timeout', type=int, default=5)
-    parser.add_argument('--limit', type=int, default=0)
-    parser.add_argument('--progress_every', type=int, default=100)
-    parser.add_argument('-v', '--verbose', action='store_true')
-    try:
-        args = parser.parse_args()
-    except Exception, e:
-        parser.print_help()
-        return False
-    file = args.file
+    # args = None
+    # parser = MyArgumentParser(description="自动打包发布工具参数说明")
+    # parser.add_argument('key', help="Redis key where items are stored")
+    # parser.add_argument('--file', required=True, help='设置xxx文件路径')
+    # parser.add_argument('--ver', help='设置版本号')
+    # parser.add_argument('--timeout', type=int, default=5)
+    # parser.add_argument('--limit', type=int, default=0)
+    # parser.add_argument('--progress_every', type=int, default=100)
+    # parser.add_argument('-v', '--verbose', action='store_true')
+    # try:
+    #     # args = parser.parse_args()
+    #     pass
+    # except Exception, e:
+    #     parser.print_help()
+    #     return False
+    # file = args.file
 
     # 初始化log
     initLog(None, not DEBUG)
@@ -86,7 +87,7 @@ def main(params):
     # 执行任务需要的参数
     param = WorkParam()
     param.pathMgr = 'pathmanager'
-    param.args = args
+    # param.args = args
 
     # 执行准备任务
     flow.prepare(param)
