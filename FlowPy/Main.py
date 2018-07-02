@@ -16,7 +16,7 @@ from usertask.MyTaskDealGame import MyTaskDealGame
 from usertask.MyTaskDealSo import MyTaskDealSo
 from usertask.MyTaskDealH5 import MyTaskDealH5
 from usertask.MyTaskDeleteTemps import MyTaskDeleteTemps
-
+import star
 
 '''
 使用时需要设置的几点：
@@ -29,23 +29,39 @@ from usertask.MyTaskDeleteTemps import MyTaskDeleteTemps
 
 DEBUG = True
 
-def initLog(logFile, isLog2File = False):
-    if isLog2File is False:
-        filename = None
-        stream = sys.stdout
+def initLog(logFile = u"log.txt", toFile = False):
+    '''
+    binPath = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "bin")
+    pid = '%d' % (os.getpid())
+    logging.basicConfig(level=logging.DEBUG,
+            format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S',
+            filename=u'%s%swrap_%s.log' % (binPath, os.sep, pid),
+            filemode='a')
+    #################################################################################################
+    #定义一个StreamHandler，将INFO级别或更高的日志信息打印到标准错误，并将其添加到当前的日志处理对象#
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
+    #################################################################################################
+    '''
+    if toFile is False:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='%(asctime)s %(levelname)-6s %(filename)20s:%(lineno)-4d  %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S',
+            stream=sys.stdout,
+        )
     else:
-        stream = None
-        filename = logFile
-        if logFile is None:
-            filename = "log.txt"
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format='%(asctime)s %(filename)-22s[line:%(lineno)-4d] %(levelname)-6s %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S',
-        stream=stream,
-        filename=filename,
-        filemode="w",
-    )
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='%(asctime)s %(levelname)-6s %(filename)20s:%(lineno)-4d  %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S',
+            filename=logFile,
+            filemode='a',
+        )
 
 
 def main(params):
@@ -109,9 +125,9 @@ if __name__ == '__main__':
         else:
             ret = main(sys.argv)
         if ret is False:
-            print "failed"
+            print("failed")
     except:
-        print traceback.format_exc()
+        print(traceback.format_exc())
         os.system('pause')
     if not ret:
         sys.exit(-1)

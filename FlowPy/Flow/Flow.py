@@ -17,7 +17,7 @@ import collections
 def WorkThread(task, param):
     try:
         task.work(param)
-    except Exception, e:
+    except Exception as e:
         logging.error(u"执行任务：%s 时发生异常", task.getName())
         logging.error(u"\n" + traceback.format_exc())
 

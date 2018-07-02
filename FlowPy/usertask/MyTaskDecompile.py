@@ -18,7 +18,7 @@ class MyTaskDecompile(ITask):
         pass
 
     def onWork(self, param):
-        print param.pathMgr
+        print(param.pathMgr)
         time.sleep(2)
         pass
 
